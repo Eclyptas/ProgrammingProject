@@ -3,7 +3,11 @@ import { AsyncStorage, Text } from 'react-native';
 import { Button, Card, CardSection, Input } from './common';
 
 class DataView extends Component {
+<<<<<<< HEAD
     state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '', sessionNo: '', dataForExport: '' };
+=======
+    state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '' };
+>>>>>>> origin
 
     componentDidMount = () => this.getData()
     
@@ -14,6 +18,7 @@ class DataView extends Component {
         AsyncStorage.getItem('stereotypies').then((value) => this.setState({ 'stereotypies': value }));
         AsyncStorage.getItem('password').then((value) => this.setState({ 'password': value }));
     }
+<<<<<<< HEAD
 
     exportData = () => {
         // TODO: loop according to sessionNo with \n at end of each
@@ -27,6 +32,8 @@ class DataView extends Component {
         var dataForExport = `${name},${dob},${stereoRate},${stereotypies},${password}`;
         this.setState({ 'dataForExport': dataForExport });
     }
+=======
+>>>>>>> origin
     
     render() {
         return (
@@ -40,7 +47,11 @@ class DataView extends Component {
                 </CardSection>
 
                 <CardSection>
+<<<<<<< HEAD
                     <Text>Rate: {this.state.stereoRate}</Text>
+=======
+                    <Text>Stereotypy Rate: {this.state.stereoRate}</Text>
+>>>>>>> origin
                 </CardSection>
 
                 <CardSection>
@@ -52,12 +63,17 @@ class DataView extends Component {
                 </CardSection>
 
                 <CardSection>
+<<<<<<< HEAD
                     <Text>Everything: {this.state.dataForExport}</Text>
                 </CardSection>
 
                 <CardSection>
                     <Button onPress={this.exportData.bind(this)}>
                         Export
+=======
+                    <Button>
+                        Done
+>>>>>>> origin
                     </Button>
                 </CardSection>
             </Card>
