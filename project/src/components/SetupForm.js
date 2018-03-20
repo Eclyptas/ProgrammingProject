@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
-    state = { name: '', age: '', stereoRate: '', stereotypies: [], pin: '' };
+    state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '' };
+    
+    componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
+    
+    setName = (value) => {
+        AsyncStorage.setItem('name', value);
+        this.setState({ 'name': value });
+    }
+    setDOB = (value) => {
+        AsyncStorage.setItem('dob', value);
+        this.setState({ 'dob': value });
+    }
+    setStereoRate = (value) => {
+        AsyncStorage.setItem('stereoRate', value);
+        this.setState({ 'stereoRate': value });
+    }
+    setStereos = (value) => {
+        AsyncStorage.setItem('stereotypies', value);
+        this.setState({ 'stereotypies': value });
+    }
+    setPassword = (value) => {
+        AsyncStorage.setItem('password', value);
+        this.setState({ 'password': value });
+    }
 
     render() {
         return (
@@ -12,16 +36,16 @@ class SetupForm extends Component {
                         placeholder='John'
                         label='Child Name'
                         value={this.state.name}
-                        onChangeText={name => this.setState({ name })}
+                        onChangeText={this.setName}
                     />
                 </CardSection>
 
                 <CardSection>
                     <Input
-                        placeholder='9'
-                        label='Age'
-                        value={this.state.age}
-                        onChangeText={age => this.setState({ age })}
+                        placeholder='01/02/2008'
+                        label='Date of Birth'
+                        value={this.state.dob}
+                        onChangeText={this.setDOB}
                     />
                 </CardSection>
 
@@ -30,7 +54,7 @@ class SetupForm extends Component {
                         placeholder='20'
                         label='Rate of Stereotypy (Num/Hr)'
                         value={this.state.stereoRate}
-                        onChangeText={stereoRate => this.setState({ stereoRate })}
+                        onChangeText={this.setStereoRate}
                     />
                 </CardSection>
 
@@ -38,18 +62,18 @@ class SetupForm extends Component {
                     <Input
                         placeholder='Clapping Hands'
                         label='Stereotypy'
-                        value={this.state.stereotypies[0]}
-                        onChangeText={stereotypy => this.setState({ stereotypies: stereotypy })}
+                        value={this.state.stereotypies}
+                        onChangeText={this.setStereos}
                     />
                 </CardSection>
 
                 <CardSection>
                     <Input
                         secureTextEntry
-                        placeholder='****'
-                        label='PIN'
-                        value={this.state.pin}
-                        onChangeText={pin => this.setState({ pin })}
+                        placeholder='********'
+                        label='Password'
+                        value={this.state.password}
+                        onChangeText={this.setPassword}
                     />
                 </CardSection>
 
