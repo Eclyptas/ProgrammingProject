@@ -16,7 +16,7 @@ class DataView extends Component {
     }
 
     exportData = () => {
-        //TODO: loop according to sessionNo with \n at end of each
+        // TODO: loop according to sessionNo with \n at end of each
 
         var name = this.state.name;
         var dob = this.state.dob;
