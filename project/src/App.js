@@ -5,7 +5,7 @@ import SetupForm from './components/SetupForm';
 import DataView from './components/DataView';
 
 class App extends Component {
-    state = { dataEntered: true };
+    state = { dataEntered: false };
 
     render() {
         switch (this.state.dataEntered) {
