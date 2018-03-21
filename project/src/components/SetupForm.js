@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
@@ -26,6 +27,10 @@ class SetupForm extends Component {
     setPassword = (value) => {
         AsyncStorage.setItem('password', value);
         this.setState({ 'password': value });
+    }
+
+    buttonPress = () => {
+        Actions.data();
     }
 
     render() {
@@ -78,7 +83,7 @@ class SetupForm extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button>
+                    <Button onPress={this.buttonPress.bind(this)}>
                         Done
                     </Button>
                 </CardSection>

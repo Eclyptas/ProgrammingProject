@@ -3,27 +3,15 @@ import { ScrollView } from 'react-native';
 import { Header } from './components/common';
 import SetupForm from './components/SetupForm';
 import DataView from './components/DataView';
+import Router from './Router';
 
 class App extends Component {
-    state = { dataEntered: false };
+    state = { dataEntered: true };
 
     render() {
-        switch (this.state.dataEntered) {
-            case false:
-                return (
-                    <ScrollView scrollEnabled={true}>
-                        <Header headerText="Stereotypy App" />
-                        <SetupForm />
-                    </ScrollView>
-                );
-            case true:
-                return (
-                    <ScrollView scrollEnabled={true}>
-                        <Header headerText="Stereotypy App" />
-                        <DataView />
-                    </ScrollView>
-                );
-        }
+        return (
+            <Router />
+        );
     }
 }
 

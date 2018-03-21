@@ -5,7 +5,7 @@ import { Button, Card, CardSection, Input } from './common';
 class DataView extends Component {
     state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '', sessionNo: '', dataForExport: '' };
 
-    componentDidMount = () => this.getData()
+    componentDidMount = () => this.getData();
     
     getData = () => {
         AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }));
@@ -16,8 +16,6 @@ class DataView extends Component {
     }
 
     exportData = () => {
-        // TODO: loop according to sessionNo with \n at end of each
-
         var name = this.state.name;
         var dob = this.state.dob;
         var stereoRate = this.state.stereoRate;
