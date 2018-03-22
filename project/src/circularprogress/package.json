@@ -1,0 +1,110 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "react-native-circular-progress",
+        "scope": null,
+        "escapedName": "react-native-circular-progress",
+        "name": "react-native-circular-progress",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Tony Montana\\React Native\\project"
+    ]
+  ],
+  "_from": "react-native-circular-progress@latest",
+  "_id": "react-native-circular-progress@0.2.0",
+  "_inCache": true,
+  "_location": "/react-native-circular-progress",
+  "_nodeVersion": "9.6.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-circular-progress_0.2.0_1520670817138_0.14634180482669068"
+  },
+  "_npmUser": {
+    "name": "jacse",
+    "email": "jacsebl@hotmail.com"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-circular-progress",
+    "scope": null,
+    "escapedName": "react-native-circular-progress",
+    "name": "react-native-circular-progress",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-circular-progress/-/react-native-circular-progress-0.2.0.tgz",
+  "_shasum": "b6ad5aa89e473cd796582dcdab4ba6e91ee9575b",
+  "_shrinkwrap": null,
+  "_spec": "react-native-circular-progress",
+  "_where": "C:\\Users\\Tony Montana\\React Native\\project",
+  "author": {
+    "name": "Bart Gryszko",
+    "email": "b@gryszko.com"
+  },
+  "bugs": {
+    "url": "https://github.com/bgryszko/react-native-circular-progress/issues"
+  },
+  "dependencies": {
+    "art": "^0.10.1",
+    "prop-types": "^15.6.0"
+  },
+  "description": "React Native component for creating animated, circular progress with ReactART",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-Q7A0eQWeHAO1cHozXELbBqnG9d3oVRy4XKNBxP7ZZUbgH45n82p6oxWuHBFcnsTNbSi+rdDWmC0xozzdfVRH6g==",
+    "shasum": "b6ad5aa89e473cd796582dcdab4ba6e91ee9575b",
+    "tarball": "https://registry.npmjs.org/react-native-circular-progress/-/react-native-circular-progress-0.2.0.tgz",
+    "fileCount": 7,
+    "unpackedSize": 373462
+  },
+  "gitHead": "cbc64b7f02870aa0a0449386a13934363c3a9ea2",
+  "homepage": "https://github.com/bgryszko/react-native-circular-progress",
+  "keywords": [
+    "react",
+    "react-native",
+    "react-component",
+    "progress",
+    "chart",
+    "react-art",
+    "art"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "bgryszko",
+      "email": "b@gryszko.com"
+    },
+    {
+      "name": "jacse",
+      "email": "jacsebl@hotmail.com"
+    },
+    {
+      "name": "markusl",
+      "email": "markus.lindqvist@iki.fi"
+    }
+  ],
+  "name": "react-native-circular-progress",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "react": ">= 15 || ~16.0.0-0",
+    "react-native": ">=0.39"
+  },
+  "readme": "[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()\n[![Version](https://img.shields.io/npm/v/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)\n[![npm](https://img.shields.io/npm/dt/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)\n[![Twitter Follow](https://img.shields.io/twitter/follow/bgryszko.svg?style=social&label=Follow)](https://twitter.com/bgryszko)\n\n# react-native-circular-progress\n\nReact Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example. **Works on iOS & Android.**\n\n---\n**Looking for a circular slider?** Take a look at my other component – [react-native-circular-slider](https://github.com/bgryszko/react-native-circular-slider) :alarm_clock:\n\n----\n\n## Example app\n![image](screenshot.gif)\n\n## Installation\n\n1. Install library `npm i --save react-native-circular-progress`\n2. As Expo user you are good to go right now, or alternatively install ART:\n3. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`\n\n## Usage\n\nImport CircularProgress or AnimatedCircularProgress.\n\n```js\nimport { AnimatedCircularProgress } from 'react-native-circular-progress';\n```\n\nUse as follows:\n\n```jsx\n<AnimatedCircularProgress\n  size={120}\n  width={15}\n  fill={100}\n  tintColor=\"#00e0ff\"\n  onAnimationComplete={() => console.log('onAnimationComplete')}\n  backgroundColor=\"#3d5875\" />\n```\n\nYou can also define a function, that'll receive current progress and for example display it inside the circle:\n\n```jsx\n<AnimatedCircularProgress\n  size={200}\n  width={3}\n  fill={this.state.fill}\n  tintColor=\"#00e0ff\"\n  backgroundColor=\"#3d5875\">\n  {\n    (fill) => (\n      <Text style={styles.points}>\n        { this.state.fill }\n      </Text>\n    )\n  }\n</AnimatedCircularProgress>\n```\n\nFinally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `performLinearAnimation(toValue, duration)` function like so:\n```jsx\n<AnimatedCircularProgress\n  ref='circularProgress'\n  ...\n/>\n```\n```javascript\nthis.refs.circularProgress.performLinearAnimation(100, 8000); // Will fill the progress bar linearly in 8 seconds\n```\n\n## Configuration\n\nYou can configure the passing by following props:\n\n- **size** – width and height of the circle\n- **width** - thickness of the lines\n- **backgroundWidth** - thickness of the background line\n- **fill** - current, percentage fill (from 0 to 100)\n- **prefill** - percentage fill before the animation (from 0 to 100)\n- **tintColor** - color of a progress line\n- **backgroundColor** - color of a background for progress line. Use 'transparent' to hide\n- **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360\n- **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))\n- **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))\n- **linecap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))\n- **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.\n- **children(fill)** - you can pass function as a child to receive current fill\n- **onAnimationComplete** - you can pass a callback function that will be invoked when animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))\n- **onLinearAnimationComplete** - you can pass a callback function that will be invoked when linear animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))\n\n## Running example app\n\n```sh\ngit clone https://github.com/bgryszko/react-native-circular-progress.git\ncd  react-native-circular-progress/example\nyarn\nyarn start\n```\n\n## Author\n\nBartosz Gryszko (b@gryszko.com)\n\nFor new components and updates [follow me on twitter](http://twitter.com/bgryszko).\n\n\n## License\n\nMIT\n\n## Special thanks\nSpecial thanks to [Chalk+Chisel](http://chalkchisel.com) for creating working environment where people grow. This component was created for one of the projects we're working on.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bgryszko/react-native-circular-progress.git"
+  },
+  "version": "0.2.0"
+}
