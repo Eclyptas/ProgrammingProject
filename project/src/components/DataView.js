@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class DataView extends Component {
@@ -24,6 +25,13 @@ class DataView extends Component {
 
         var dataForExport = `${name},${dob},${stereoRate},${stereotypies},${password}`;
         this.setState({ 'dataForExport': dataForExport });
+    }
+
+    goToTimer = () => {
+        Actions.timer();
+    }
+    goToSetup = () => {
+        Actions.setup();
     }
     
     render() {
@@ -56,6 +64,18 @@ class DataView extends Component {
                 <CardSection>
                     <Button onPress={this.exportData.bind(this)}>
                         Export
+                    </Button>
+                </CardSection>
+
+                <CardSection>
+                    <Button onPress={this.goToTimer.bind(this)}>
+                        Return to Training
+                    </Button>
+                </CardSection>
+
+                <CardSection>
+                    <Button onPress={this.goToSetup.bind(this)}>
+                        Edit Info
                     </Button>
                 </CardSection>
             </Card>

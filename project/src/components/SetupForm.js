@@ -29,8 +29,8 @@ class SetupForm extends Component {
         this.setState({ 'password': value });
     }
 
-    buttonPress = () => {
-        Actions.data();
+    goToData = () => {
+        Actions.dataView();
     }
 
     render() {
@@ -83,7 +83,7 @@ class SetupForm extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button onPress={this.buttonPress.bind(this)}>
+                    <Button onPress={this.goToData.bind(this)}>
                         Done
                     </Button>
                 </CardSection>
