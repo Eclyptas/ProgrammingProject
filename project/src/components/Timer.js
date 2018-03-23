@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes, { number } from 'prop-types';
-import {Vibration, Button, StyleSheet, Text, View, TextInput } from 'react-native';
+import {Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input } from './common';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -104,68 +104,70 @@ class Timer extends Component {
         }
 
             return (
-                <Card style={styles.container}>
-                    
-                    <View style={styles.clockContainer}>
-                        <AnimatedCircularProgress
-                        size={300}
-                        width={150}
-                        fill={(this.state.timeRemaining/this.state.time)*100}
-                        tintColor="#ff0505"
-                        onAnimationComplete={() => console.log('onAnimationComplete')}
-                        ref="circularProgress"
-                        backgroundColor="#ffffff"
-                        rotation={0}
-                        tension={0}
-                        friction={20}
-                        arcSweepAngle={360}
-                        />
-                    </View>
-                    
-                    <View style={styles.alternativeLayoutButtonContainer}>
-                        <Button
-                        onPress={this.clickedStop.bind(this)}
-                        title={this.buttons.stopButton}
-                        color="#D30700"
-                        />
-                        <Button
-                        onPress={this.startClock.bind(this)}
-                        title={this.buttons.startButton}
-                        color="#49D53C"
-                        />
-                    </View>
-                    
-                    <View style={styles.alternativeTextInput}>
-                        <TextInput
-                        style = {{fontSize:35}}
-                        {...this.props}
-                        editable = {true}
-                        onChangeText={(text)=> this.onChangedMin(text)}
-                        maxLength = {2}
-                        keyboardType = 'numeric'
-                        textAlign={'center'}
-                        value= {this.state.timeInputMS}
-                        />
+                <ScrollView scrollEnabled={true}>
+                    <Card style={styles.container}>
+                        
+                        <View style={styles.clockContainer}>
+                            <AnimatedCircularProgress
+                            size={300}
+                            width={150}
+                            fill={(this.state.timeRemaining/this.state.time)*100}
+                            tintColor="#D94336"
+                            onAnimationComplete={() => console.log('onAnimationComplete')}
+                            ref="circularProgress"
+                            backgroundColor="#ffffff"
+                            rotation={0}
+                            tension={0}
+                            friction={20}
+                            arcSweepAngle={360}
+                            />
+                        </View>
+                        
+                        <View style={styles.alternativeLayoutButtonContainer}>
+                            <Button
+                            onPress={this.clickedStop.bind(this)}
+                            title={this.buttons.stopButton}
+                            color="#D30700"
+                            />
+                            <Button
+                            onPress={this.startClock.bind(this)}
+                            title={this.buttons.startButton}
+                            color="#49D53C"
+                            />
+                        </View>
+                        
+                        <View style={styles.alternativeTextInput}>
+                            <TextInput
+                            style = {{fontSize:35}}
+                            {...this.props}
+                            editable = {true}
+                            onChangeText={(text)=> this.onChangedMin(text)}
+                            maxLength = {2}
+                            keyboardType = 'numeric'
+                            textAlign={'center'}
+                            value= {this.state.timeInputMS}
+                            />
 
-                        <TextInput
-                        style = {{fontSize:35}}
-                        {...this.props}
-                        editable = {true}
-                        onChangeText={(text)=> this.onChangedSec(text)}
-                        maxLength = {2}
-                        keyboardType = 'numeric'
-                        textAlign={'center'}
-                        value= {this.state.timeInputSS}
-                        />
-                    </View>
-                        
-                        <CardSection>
-                            <Button onPress={this.goToData.bind(this)} title="Data">
-                                Data
-                            </Button>
-                        </CardSection>
-                        
-                    </Card>
+                            <TextInput
+                            style = {{fontSize:35}}
+                            {...this.props}
+                            editable = {true}
+                            onChangeText={(text)=> this.onChangedSec(text)}
+                            maxLength = {2}
+                            keyboardType = 'numeric'
+                            textAlign={'center'}
+                            value= {this.state.timeInputSS}
+                            />
+                        </View>
+                            
+                            <CardSection>
+                                <Button onPress={this.goToData.bind(this)} title="Data">
+                                    Data
+                                </Button>
+                            </CardSection>
+                            
+                        </Card>
+                    </ScrollView>
                 );
     }
 }

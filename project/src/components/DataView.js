@@ -4,14 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class DataView extends Component {
-    state = { name: '', dob: '', stereoRate: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '', sessionNo: '', dataForExport: '' };
+    state = { name: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '', sessionNo: '', dataForExport: '' };
 
     componentDidMount = () => this.getData();
     
     getData = () => {
         AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }));
         AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }));
-        AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }));
         AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
         AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
         AsyncStorage.getItem('stereotypy3').then((value) => this.setState({ 'stereotypy3': value }));
@@ -21,13 +20,12 @@ class DataView extends Component {
     exportData = () => {
         var name = this.state.name;
         var dob = this.state.dob;
-        var stereoRate = this.state.stereoRate;
         var stereotypy1 = this.state.stereotypy1;
         var stereotypy2 = this.state.stereotypy2;
         var stereotypy3 = this.state.stereotypy3;
         var password = this.state.password;
 
-        var dataForExport = `${name},${dob},${stereoRate},${stereotypy1},${stereotypy2},${stereotypy3},${password}`;
+        var dataForExport = `${name},${dob},${stereotypy1},${stereotypy2},${stereotypy3},${password}`;
         this.setState({ 'dataForExport': dataForExport });
     }
 
@@ -47,10 +45,6 @@ class DataView extends Component {
 
                 <CardSection>
                     <Text>Date of Birth: {this.state.dob}</Text>
-                </CardSection>
-
-                <CardSection>
-                    <Text>Rate: {this.state.stereoRate}</Text>
                 </CardSection>
 
                 <CardSection>

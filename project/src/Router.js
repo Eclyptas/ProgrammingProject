@@ -6,10 +6,12 @@ import Timer from './components/Timer';
 
 const RouterComponent = () => {
     return (
-        <Router navigationBarStyle={ styles.headerStyle } titleStyle={styles.titleStyle}>
+        <Router navigationBarStyle={ styles.headerStyle } titleStyle={ styles.navTitleStyle } >
             <Scene key="root" hideNavBar>
                 <Scene key="setup" initial>
-                    <Scene key="setupForm" component={SetupForm} title="Setup" />
+                    <Scene key="setupForm"
+                           component={SetupForm}
+                           title="Setup" />
                 </Scene>
                 <Scene key="data">
                     <Scene key="dataView" component={DataView} title="Data" />
@@ -26,12 +28,13 @@ const styles = {
     headerStyle: {
         backgroundColor: '#D94336',
         justifyContent: 'center',
-        alignItems: 'center',
+        //alignItems: 'center',
         position: 'relative',
     },
-    titleStyle: {
+    navTitleStyle: {
         fontSize: 20,
-        color: '#fff'
+        color: 'white',
+        alignSelf: 'center'
     }
 };
 
