@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class DataView extends Component {
-    state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '', sessionNo: '', dataForExport: '' };
+    state = { name: '', dob: '', stereoRate: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '', sessionNo: '', dataForExport: '' };
 
     componentDidMount = () => this.getData();
     
@@ -12,7 +12,9 @@ class DataView extends Component {
         AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }));
         AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }));
         AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }));
-        AsyncStorage.getItem('stereotypies').then((value) => this.setState({ 'stereotypies': value }));
+        AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
+        AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
+        AsyncStorage.getItem('stereotypy3').then((value) => this.setState({ 'stereotypy3': value }));
         AsyncStorage.getItem('password').then((value) => this.setState({ 'password': value }));
     }
 
@@ -20,10 +22,12 @@ class DataView extends Component {
         var name = this.state.name;
         var dob = this.state.dob;
         var stereoRate = this.state.stereoRate;
-        var stereotypies = this.state.stereotypies;
+        var stereotypy1 = this.state.stereotypy1;
+        var stereotypy2 = this.state.stereotypy2;
+        var stereotypy3 = this.state.stereotypy3;
         var password = this.state.password;
 
-        var dataForExport = `${name},${dob},${stereoRate},${stereotypies},${password}`;
+        var dataForExport = `${name},${dob},${stereoRate},${stereotypy1},${stereotypy2},${stereotypy3},${password}`;
         this.setState({ 'dataForExport': dataForExport });
     }
 
@@ -50,7 +54,15 @@ class DataView extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Text>Stereotypies: {this.state.stereotypies}</Text>
+                    <Text>Stereotypy 1: {this.state.stereotypy1}</Text>
+                </CardSection>
+
+                <CardSection>
+                    <Text>Stereotypy 2: {this.state.stereotypy2}</Text>
+                </CardSection>
+
+                <CardSection>
+                    <Text>Stereotypy 3: {this.state.stereotypy3}</Text>
                 </CardSection>
 
                 <CardSection>

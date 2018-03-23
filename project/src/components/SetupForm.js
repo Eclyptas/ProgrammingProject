@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { ScrollView, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
-    state = { name: '', dob: '', stereoRate: '', stereotypies: '', password: '' };
+    state = { name: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
     
-    componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
-    
+    componentDidMount = () => {
+        AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
+        AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }))
+        AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }))
+        AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
+        AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
+        AsyncStorage.getItem('stereotypy3').then((value) => this.setState({ 'stereotypy3': value }));
+    }
+
     setName = (value) => {
         AsyncStorage.setItem('name', value);
         this.setState({ 'name': value });
@@ -16,13 +23,17 @@ class SetupForm extends Component {
         AsyncStorage.setItem('dob', value);
         this.setState({ 'dob': value });
     }
-    setStereoRate = (value) => {
-        AsyncStorage.setItem('stereoRate', value);
-        this.setState({ 'stereoRate': value });
+    setStereo1 = (value) => {
+        AsyncStorage.setItem('stereotypy1', value);
+        this.setState({ 'stereotypy1': value });
     }
-    setStereos = (value) => {
-        AsyncStorage.setItem('stereotypies', value);
-        this.setState({ 'stereotypies': value });
+    setStereo2 = (value) => {
+        AsyncStorage.setItem('stereotypy2', value);
+        this.setState({ 'stereotypy2': value });
+    }
+    setStereo3 = (value) => {
+        AsyncStorage.setItem('stereotypy3', value);
+        this.setState({ 'stereotypy3': value });
     }
     setPassword = (value) => {
         AsyncStorage.setItem('password', value);
@@ -30,64 +41,69 @@ class SetupForm extends Component {
     }
 
     goToData = () => {
-        Actions.dataView();
+        Actions.data();
     }
 
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Input
-                        placeholder='John'
-                        label='Child Name'
-                        value={this.state.name}
-                        onChangeText={this.setName}
-                    />
-                </CardSection>
+            <ScrollView scrollEnabled={true}>
+                <Card>
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.name}
+                            label='Child Name'
+                            onChangeText={this.setName}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Input
-                        placeholder='01/02/2008'
-                        label='Date of Birth'
-                        value={this.state.dob}
-                        onChangeText={this.setDOB}
-                    />
-                </CardSection>
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.dob}
+                            label='Date of Birth'
+                            onChangeText={this.setDOB}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Input
-                        placeholder='20'
-                        label='Rate of Stereotypy (Num/Hr)'
-                        value={this.state.stereoRate}
-                        onChangeText={this.setStereoRate}
-                    />
-                </CardSection>
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.stereotypy1}
+                            label='Stereotypy 1'
+                            onChangeText={this.setStereo1}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Input
-                        placeholder='Clapping Hands'
-                        label='Stereotypy'
-                        value={this.state.stereotypies}
-                        onChangeText={this.setStereos}
-                    />
-                </CardSection>
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.stereotypy2}
+                            label='Stereotypy 2'
+                            onChangeText={this.setStereo2}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Input
-                        secureTextEntry
-                        placeholder='********'
-                        label='Password'
-                        value={this.state.password}
-                        onChangeText={this.setPassword}
-                    />
-                </CardSection>
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.stereotypy3}
+                            label='Stereotypy 3'
+                            onChangeText={this.setStereo3}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.goToData.bind(this)}>
-                        Done
-                    </Button>
-                </CardSection>
-            </Card>
+                    <CardSection>
+                        <Input
+                            secureTextEntry
+                            placeholder='********'
+                            label='Password'
+                            onChangeText={this.setPassword}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <Button onPress={this.goToData.bind(this)}>
+                            Done
+                        </Button>
+                    </CardSection>
+                </Card>
+            </ScrollView>
         );
     }
 }
