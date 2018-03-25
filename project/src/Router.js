@@ -6,25 +6,25 @@ import DataView from './components/DataView';
 import Timer from './components/Timer';
 import StarBoard from './components/StarBoard';
 
-//TODO fix stars title first name not showing
-
 class RouterComponent extends Component {
-    state = { firstName: '', starsTitle: '' };
+    state = { starsTitle: '' };
 
     componentDidMount = () => {
-        AsyncStorage.getItem('firstName').then((value) => this.setState({ 'firstName': value }));
+        AsyncStorage.getItem('starsTitle').then((value) => this.setState({ 'starsTitle': value }));
         
+        {/*
         var firstName = this.state.firstName;
         var temp = "'s Stars";
         var starsTitle = `${firstName}${temp}`;
         this.setState({ 'starsTitle': starsTitle });
+        */}
     }
 
     render() {
         return (
             <Router navigationBarStyle={ styles.headerStyle } titleStyle={ styles.navTitleStyle } >
                 <Scene key="root" hideNavBar>
-                    <Scene key="setup" initial>
+                    <Scene key="setup" >
                         <Scene key="setupForm"
                             component={SetupForm}
                             title="Setup" />
@@ -34,15 +34,15 @@ class RouterComponent extends Component {
                             component={DataView}
                             title="Data" />
                     </Scene>
-                    <Scene key="timer">
+                    <Scene key="timer" initial >
                         <Scene key="timerView"
                             component={Timer}
                             title="Training" />
                     </Scene>
-                    <Scene key={"stars"}>
+                    <Scene key="stars" >
                         <Scene key="starBoard"
                             component={StarBoard}
-                            title={this.state.title} />
+                            title={this.state.starsTitle} />
                     </Scene>
                 </Scene>
             </Router>

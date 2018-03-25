@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
-    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
+    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: ''};
     
     componentDidMount = () => {
         AsyncStorage.getItem('firstName').then((value) => this.setState({ 'firstName': value }));
@@ -19,6 +19,10 @@ class SetupForm extends Component {
     setFirstName = (value) => {
         AsyncStorage.setItem('firstName', value);
         this.setState({ 'firstName': value });
+        
+        var temp = "'s Stars";
+        var starsTitle = `${value}${temp}`;
+        AsyncStorage.setItem('starsTitle', starsTitle);
     }
     setSurname = (value) => {
         AsyncStorage.setItem('surname', value);
