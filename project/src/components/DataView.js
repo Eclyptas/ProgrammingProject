@@ -68,8 +68,8 @@ class DataView extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button onPress={this.exportData.bind(this)}>
-                        Export
+                    <Button onPress={this.goToSetup.bind(this)}>
+                        Edit Info
                     </Button>
                 </CardSection>
 
@@ -80,10 +80,11 @@ class DataView extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button onPress={this.goToSetup.bind(this)}>
-                        Edit Info
+                    <Button onPress={this.exportData.bind(this)}>
+                        Export
                     </Button>
                 </CardSection>
+
             </Card>
         );
     }
