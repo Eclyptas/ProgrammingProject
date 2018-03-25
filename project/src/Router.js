@@ -24,7 +24,7 @@ class RouterComponent extends Component {
         return (
             <Router navigationBarStyle={ styles.headerStyle } titleStyle={ styles.navTitleStyle } >
                 <Scene key="root" hideNavBar>
-                    <Scene key="setup">
+                    <Scene key="setup" initial>
                         <Scene key="setupForm"
                             component={SetupForm}
                             title="Setup" />
@@ -34,7 +34,7 @@ class RouterComponent extends Component {
                             component={DataView}
                             title="Data" />
                     </Scene>
-                    <Scene key="timer" initial>
+                    <Scene key="timer">
                         <Scene key="timerView"
                             component={Timer}
                             title="Training" />
