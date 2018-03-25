@@ -95,6 +95,10 @@ class Timer extends Component {
           Actions.data();
       }
 
+      goToStars = () => {
+        Actions.stars();
+    }
+
     render() {
         if (this.state.timeRemaining <= 0)
         {
@@ -161,9 +165,13 @@ class Timer extends Component {
                         </View>
                             
                             <CardSection>
-                                <Button onPress={this.goToData.bind(this)} title="Data">
-                                    Data
-                                </Button>
+                                <Button onPress={this.goToData.bind(this)}
+                                        title="Data" />
+                            </CardSection>
+
+                            <CardSection>
+                                <Button onPress={this.goToStars.bind(this)}
+                                        title="Stars" />
                             </CardSection>
                             
                         </Card>

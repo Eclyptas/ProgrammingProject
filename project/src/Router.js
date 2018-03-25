@@ -3,6 +3,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import SetupForm from './components/SetupForm';
 import DataView from './components/DataView';
 import Timer from './components/Timer';
+import StarBoard from './components/StarBoard';
 
 const RouterComponent = () => {
     return (
@@ -18,6 +19,9 @@ const RouterComponent = () => {
                 </Scene>
                 <Scene key="timer">
                     <Scene key="timerView" component={Timer} title="Training" />
+                </Scene>
+                <Scene key="stars">
+                    <Scene key="starBoard" component={StarBoard} title="Stars" />
                 </Scene>
             </Scene>
         </Router>
