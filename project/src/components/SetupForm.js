@@ -4,20 +4,25 @@ import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
-    state = { name: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
+    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
     
     componentDidMount = () => {
-        AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
-        AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }))
-        AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }))
+        AsyncStorage.getItem('firstName').then((value) => this.setState({ 'firstName': value }));
+        AsyncStorage.getItem('surname').then((value) => this.setState({ 'surname': value }));
+        AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }));
+        AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }));
         AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
         AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
         AsyncStorage.getItem('stereotypy3').then((value) => this.setState({ 'stereotypy3': value }));
     }
 
-    setName = (value) => {
-        AsyncStorage.setItem('name', value);
-        this.setState({ 'name': value });
+    setFirstName = (value) => {
+        AsyncStorage.setItem('firstName', value);
+        this.setState({ 'firstName': value });
+    }
+    setSurname = (value) => {
+        AsyncStorage.setItem('surname', value);
+        this.setState({ 'surname': value });
     }
     setDOB = (value) => {
         AsyncStorage.setItem('dob', value);
@@ -50,9 +55,17 @@ class SetupForm extends Component {
                 <Card>
                     <CardSection>
                         <Input
-                            placeholder={this.state.name}
-                            label='Child Name'
-                            onChangeText={this.setName}
+                            placeholder={this.state.firstName}
+                            label='First Name'
+                            onChangeText={this.setFirstName}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.surname}
+                            label='Surname'
+                            onChangeText={this.setSurname}
                         />
                     </CardSection>
 

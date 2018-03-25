@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { Button, Card, CardSection, Input} from './common';
 import {StyleSheet, View, ImageBackground, Image} from 'react-native';
 
+//TODO show total number of stars
+
 class SetupForm extends Component {
-    state = { name: '', age: '', stereoRate: '', stereotypies: [], pin: '' };
+    state = { name: '', age: '', stereoRate: '', stereotypies: '', password: '' };
 
     render() {
         return (
                 <ImageBackground
                     source={require('project/images/corkboard.png')}
                     style={styles.container}>
+
+                    <View>
+
+                    </View>
 
                     <View style = {styles.starRow}>
                         <Image source = {require('project/images/stargold.png')}
