@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text } from 'react-native';
+import { ScrollView, AsyncStorage, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class DataView extends Component {
-    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '', sessionNo: '', dataForExport: '' };
+    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '', sessionNo: '', dataForExport: '', initialised: '' };
 
     componentDidMount = () => this.getData();
     
@@ -15,6 +15,9 @@ class DataView extends Component {
         AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
         AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
         AsyncStorage.getItem('stereotypy3').then((value) => this.setState({ 'stereotypy3': value }));
+
+        AsyncStorage.getItem('sessionNo').then((value) => this.setState({ 'sessionNo': value }));
+        AsyncStorage.getItem('initialised').then((value) => this.setState({ 'initialised': value }));
     }
 
     exportData = () => {
@@ -25,7 +28,10 @@ class DataView extends Component {
         var stereotypy2 = this.state.stereotypy2;
         var stereotypy3 = this.state.stereotypy3;
 
-        var dataForExport = `${firstName},${surname},${dob},${stereotypy1},${stereotypy2},${stereotypy3}`;
+        var initialised = this.state.initialised;
+        var sessionNo = this.state.sessionNo;
+
+        var dataForExport = `${firstName},${surname},${dob},${stereotypy1},${stereotypy2},${stereotypy3},${initialised},${sessionNo}`;
         this.setState({ 'dataForExport': dataForExport });
     }
 
@@ -38,54 +44,69 @@ class DataView extends Component {
     
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Text>First Name: {this.state.firstName}</Text>
-                </CardSection>
+            <ScrollView scrollEnabled={true}>
+                <Card>
+                    <CardSection>
+                        <Text>First Name: {this.state.firstName}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Surname: {this.state.surname}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Surname: {this.state.surname}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Date of Birth: {this.state.dob}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Date of Birth: {this.state.dob}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Stereotypy 1: {this.state.stereotypy1}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Stereotypy 1: {this.state.stereotypy1}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Stereotypy 2: {this.state.stereotypy2}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Stereotypy 2: {this.state.stereotypy2}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Stereotypy 3: {this.state.stereotypy3}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Stereotypy 3: {this.state.stereotypy3}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Text>Everything: {this.state.dataForExport}</Text>
-                </CardSection>
+                    <CardSection>
+                        <Text>Everything: {this.state.dataForExport}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.goToSetup.bind(this)}>
-                        Edit Info
-                    </Button>
-                </CardSection>
+                    <CardSection>
+                        <Button onPress={this.goToSetup.bind(this)}>
+                            Edit Info
+                        </Button>
+                    </CardSection>
+                </Card>
 
-                <CardSection>
-                    <Button onPress={this.goToTimer.bind(this)}>
-                        Return to Training
-                    </Button>
-                </CardSection>
+                <Card>
+                    <CardSection>
+                        <Text>Sessions: {this.state.sessionNo}</Text>
+                    </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.exportData.bind(this)}>
-                        Export
-                    </Button>
-                </CardSection>
+                    <CardSection>
+                        <Text>Surname: {this.state.surname}</Text>
+                    </CardSection>
 
-            </Card>
+                    <CardSection>
+                        <Text>Date of Birth: {this.state.dob}</Text>
+                    </CardSection>
+
+                    <CardSection>
+                        <Button onPress={this.goToTimer.bind(this)}>
+                            Return to Training
+                        </Button>
+                    </CardSection>
+
+                    <CardSection>
+                        <Button onPress={this.exportData.bind(this)}>
+                            Export
+                        </Button>
+                    </CardSection>
+                </Card>
+            </ScrollView>
         );
     }
 }

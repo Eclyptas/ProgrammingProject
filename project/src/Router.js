@@ -6,18 +6,28 @@ import DataView from './components/DataView';
 import Timer from './components/Timer';
 import StarBoard from './components/StarBoard';
 
+// Async variables { 'firstTimeInit': true, sessionNo': 0, 'successCount': 0, 'failCount': 0, 'sessionDate': '', 'sessionTargetTimes': [], 'sessionAchievedTimes': [],
+//                   'sessionSucceeded': [], 'sessionFailed': []  }
+
 class RouterComponent extends Component {
     state = { starsTitle: '' };
 
     componentDidMount = () => {
         AsyncStorage.getItem('starsTitle').then((value) => this.setState({ 'starsTitle': value }));
-        
-        {/*
-        var firstName = this.state.firstName;
-        var temp = "'s Stars";
-        var starsTitle = `${firstName}${temp}`;
-        this.setState({ 'starsTitle': starsTitle });
-        */}
+        this.firstTimeInit();
+    }
+
+    firstTimeInit = () => {
+        AsyncStorage.getItem('initialised')
+        .then(initialised => {
+            if(initialised === null) {
+                let temp = +0
+                AsyncStorage.setItem('sessionNo', '0')
+
+
+                AsyncStorage.setItem('initialised', 'true')
+            }
+        })
     }
 
     render() {
@@ -29,12 +39,12 @@ class RouterComponent extends Component {
                             component={SetupForm}
                             title="Setup" />
                     </Scene>
-                    <Scene key="data">
+                    <Scene key="data" initial >
                         <Scene key="dataView"
                             component={DataView}
                             title="Data" />
                     </Scene>
-                    <Scene key="timer" initial >
+                    <Scene key="timer" >
                         <Scene key="timerView"
                             component={Timer}
                             title="Training" />

@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes, { number } from 'prop-types';
-import {Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input } from './common';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
+// Async variables { 'firstTimeInit': true, sessionNo': 0, 'successCount': 0, 'failCount': 0, 'sessionDate': '', 'sessionTargetTimes': [], 'sessionAchievedTimes': [],
+//                   'sessionSucceeded': [], 'sessionFailed': []  }
 
 class Timer extends Component {
     constructor(props) {
         super(props);
-    this.state = {clickCount:0,timeMultiplier:1, timeRemaining:20, time:20, incrementSet: false, incrementer:0, myFunction:0, failedRound: false, passedRound: false, clockRunning: false, timeInputMin:1, timeInputSec:30, timeInputMS:"1",timeInputSS:"30"}
+    this.state = {clickCount:0, timeMultiplier:1, timeRemaining:20, time:20, incrementSet: false, incrementer:0, myFunction:0, failedRound: false, passedRound: false, clockRunning: false, timeInputMin:1, timeInputSec:30, timeInputMS:"1",timeInputSS:"30",
+                   }
     this.buttons = {stopButton:"Stop", startButton:"Start"}
     }
 
-      startClock(){
-      var _this = this;
-      this.state.timeRemaining = (this.state.timeInputMin*60) + this.state.timeInputSec;
-      this.state.time = (this.state.timeInputMin*60) + this.state.timeInputSec;
-      this.state.clockRunning = true;
+    startClock(){
+        AsyncStorage.getItem('sessionNo').then((value) => {
+            var temp = parseInt(value, 10) + 1;
+            value = +value + 1;
+            AsyncStorage.setItem( 'sessionNo', JSON.stringify(value) );            
+        })
+        
+        var _this = this;
+        this.state.timeRemaining = (this.state.timeInputMin*60) + this.state.timeInputSec;
+        this.state.time = (this.state.timeInputMin*60) + this.state.timeInputSec;
+        this.state.clockRunning = true;        
 
       clearInterval(this.state.incrementer);
       this.state.incrementer = setInterval(function () {
