@@ -37,6 +37,8 @@ class DataView extends Component {
     }
 
     exportData = () => {
+        var dataForExport = "";
+
         var firstName = this.state.firstName;
         var surname = this.state.surname;
         var dob = this.state.dob;
@@ -44,12 +46,18 @@ class DataView extends Component {
         var stereotypy1 = this.state.stereotypy1;
         var stereotypy2 = this.state.stereotypy2;
         var stereotypy3 = this.state.stereotypy3;
-
-        var initialised = this.state.initialised;
         var sessionNo = this.state.sessionNo;
 
-        var dataForExport = `${firstName},${surname},${dob},${stereotypy1},${stereotypy2},${stereotypy3},${initialised},${sessionNo}`;
-        this.setState({ 'dataForExport': dataForExport });
+        AsyncStorage.getItem('sessions').then((value) => {
+            var tempSessions = JSON.parse(value);
+
+            for (i = 0; i < tempSessions.values.length; i++) {
+                sessionInfo += `${id},${dob},${stereotypy1},${stereotypy2},${stereotypy3},${tempSessions.values[i].number},${tempSessions.values[i].date}${tempSessions.values[i].target}${tempSessions.values[i].achieved}${tempSessions.values[i].passed}`;
+            }
+            AsyncStorage.setItem( 'dataForExport', dataForExport );
+        })
+
+        dataForExport = `${sessionNo},${firstName},${surname},${dob},${stereotypy1},${stereotypy2},${stereotypy3}`;
     }
 
     goToTimer = () => {
@@ -57,6 +65,44 @@ class DataView extends Component {
     }
     goToSetup = () => {
         Actions.setup();
+    }
+    goToEmail = () => {
+        var dataForExport = "";
+
+        var firstName = this.state.firstName;
+        var surname = this.state.surname;
+        var dob = this.state.dob;
+        if (dob === null) {
+            dob = "";
+        }
+        var id = this.state.id;
+        if (id === null) {
+            id = "";
+        }
+        var stereotypy1 = this.state.stereotypy1;
+        if (stereotypy1 === null) {
+            stereotypy1 = "";
+        }
+        var stereotypy2 = this.state.stereotypy2;
+        if (stereotypy2 === null) {
+            stereotypy2 = "";
+        }
+        var stereotypy3 = this.state.stereotypy3;
+        if (stereotypy3 === null) {
+            stereotypy3 = "";
+        }
+        var sessionNo = this.state.sessionNo;
+
+        AsyncStorage.getItem('sessions').then((value) => {
+            var tempSessions = JSON.parse(value);
+
+            for (i = 0; i < tempSessions.values.length; i++) {
+                dataForExport += `${id},${dob},${stereotypy1},${stereotypy2},${stereotypy3},${tempSessions.values[i].number},${tempSessions.values[i].date},${tempSessions.values[i].target},${tempSessions.values[i].achieved},${tempSessions.values[i].passed}\n\r`;
+            }
+            AsyncStorage.setItem( 'dataForExport', dataForExport );
+        })
+
+        Actions.exportData();
     }
     
     render() {
@@ -122,7 +168,7 @@ class DataView extends Component {
                     </CardSection>
 
                     <CardSection>
-                        <Button onPress={this.exportData.bind(this)}>
+                        <Button onPress={this.goToEmail.bind(this)}>
                             Export
                         </Button>
                     </CardSection>

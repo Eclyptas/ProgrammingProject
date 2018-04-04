@@ -5,6 +5,7 @@ import SetupForm from './components/SetupForm';
 import DataView from './components/DataView';
 import Timer from './components/Timer';
 import StarBoard from './components/StarBoard';
+import Email from './components/Email';
 
 class RouterComponent extends Component {
     state = { starsTitle: '' };
@@ -53,6 +54,11 @@ class RouterComponent extends Component {
                         <Scene key="starBoard"
                             component={StarBoard}
                             title={this.state.starsTitle} />
+                    </Scene>
+                    <Scene key="exportData" >
+                        <Scene key="email"
+                            component={Email}
+                            title="Export" />
                     </Scene>
                 </Scene>
             </Router>
