@@ -6,9 +6,6 @@ import DataView from './components/DataView';
 import Timer from './components/Timer';
 import StarBoard from './components/StarBoard';
 
-// Async variables { 'firstTimeInit': true, sessionNo': 0, 'successCount': 0, 'failCount': 0, 'sessionDate': '', 'sessionTargetTimes': [], 'sessionAchievedTimes': [],
-//                   'sessionSucceeded': [], 'sessionFailed': []  }
-
 class RouterComponent extends Component {
     state = { starsTitle: '' };
 
@@ -21,10 +18,13 @@ class RouterComponent extends Component {
         AsyncStorage.getItem('initialised')
         .then(initialised => {
             if(initialised === null) {
-                let temp = +0
+                var sessions = {
+                    values : []
+                }
                 AsyncStorage.setItem('sessionNo', '0')
-
-
+                AsyncStorage.setItem('successCount', '0')
+                AsyncStorage.setItem('failCount', '0')
+                AsyncStorage.setItem('sessions', JSON.stringify(sessions))
                 AsyncStorage.setItem('initialised', 'true')
             }
         })
@@ -39,12 +39,12 @@ class RouterComponent extends Component {
                             component={SetupForm}
                             title="Setup" />
                     </Scene>
-                    <Scene key="data" initial >
+                    <Scene key="data" >
                         <Scene key="dataView"
                             component={DataView}
                             title="Data" />
                     </Scene>
-                    <Scene key="timer" >
+                    <Scene key="timer" initial>
                         <Scene key="timerView"
                             component={Timer}
                             title="Training" />

@@ -4,12 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import { Button, Card, CardSection, Input } from './common';
 
 class SetupForm extends Component {
-    state = { firstName: '', surname: '', dob: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
+    state = { firstName: '', surname: '', dob: '', id: '', stereotypy1: '', stereotypy2: '', stereotypy3: '', password: '' };
     
     componentDidMount = () => {
         AsyncStorage.getItem('firstName').then((value) => this.setState({ 'firstName': value }));
         AsyncStorage.getItem('surname').then((value) => this.setState({ 'surname': value }));
         AsyncStorage.getItem('dob').then((value) => this.setState({ 'dob': value }));
+        AsyncStorage.getItem('id').then((value) => this.setState({ 'id': value }));
         AsyncStorage.getItem('stereoRate').then((value) => this.setState({ 'stereoRate': value }));
         AsyncStorage.getItem('stereotypy1').then((value) => this.setState({ 'stereotypy1': value }));
         AsyncStorage.getItem('stereotypy2').then((value) => this.setState({ 'stereotypy2': value }));
@@ -30,6 +31,10 @@ class SetupForm extends Component {
     setDOB = (value) => {
         AsyncStorage.setItem('dob', value);
         this.setState({ 'dob': value });
+    }
+    setID = (value) => {
+        AsyncStorage.setItem('id', value);
+        this.setState({ 'id': value });
     }
     setStereo1 = (value) => {
         AsyncStorage.setItem('stereotypy1', value);
@@ -77,6 +82,14 @@ class SetupForm extends Component {
                             placeholder={this.state.dob}
                             label='Date of Birth'
                             onChangeText={this.setDOB}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <Input
+                            placeholder={this.state.id}
+                            label='ID Number'
+                            onChangeText={this.setID}
                         />
                     </CardSection>
 

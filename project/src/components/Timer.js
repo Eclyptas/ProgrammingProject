@@ -5,8 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input } from './common';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-// Async variables { 'firstTimeInit': true, sessionNo': 0, 'successCount': 0, 'failCount': 0, 'sessionDate': '', 'sessionTargetTimes': [], 'sessionAchievedTimes': [],
-//                   'sessionSucceeded': [], 'sessionFailed': []  }
+// TODO Account for zero being entered as the time
 
 class Timer extends Component {
     constructor(props) {
@@ -16,12 +15,7 @@ class Timer extends Component {
     this.buttons = {stopButton:"Stop", startButton:"Start"}
     }
 
-    startClock(){
-        AsyncStorage.getItem('sessionNo').then((value) => {
-            var temp = parseInt(value, 10) + 1;
-            value = +value + 1;
-            AsyncStorage.setItem( 'sessionNo', JSON.stringify(value) );            
-        })
+    startClock() {
         
         var _this = this;
         this.state.timeRemaining = (this.state.timeInputMin*60) + this.state.timeInputSec;
@@ -37,12 +31,57 @@ class Timer extends Component {
       }
       
       stopClock(){
+
         clearInterval(this.state.incrementer);
 
         this.state.clockRunning = false;
         this.state.clickCount = 0;
         this.buttons.stopButton = "Stop";
         Vibration.vibrate(1000);
+
+        AsyncStorage.getItem('sessionNo').then((value) => {
+            var day = new Date().getDate();
+            var month = new Date().getMonth() + 1;
+            var year = new Date().getFullYear();
+            var date = day + '-' + month + '-' + year;
+
+            var temp = parseInt(value, 10) + 1;
+            value = +value + 1;
+            AsyncStorage.setItem( 'sessionNo', JSON.stringify(value) );
+
+            var targetSeconds = this.state.timeInputSec.toString();
+            if (targetSeconds.length == 1){
+                targetSeconds = 0 + targetSeconds;
+            }
+            var targetTime = (this.state.timeInputMin*60) + this.state.timeInputSec;
+            var achievedTime = targetTime - this.state.timeRemaining;
+            var achievedTimeString = '';
+            var achievedMinutes = Math.floor(achievedTime / 60);
+            var achievedSeconds = (achievedTime % 60).toString();
+            if (achievedSeconds.length == 1){
+                achievedSeconds = 0 + achievedSeconds;
+            }
+            achievedTimeString += achievedMinutes + ":" + achievedSeconds;
+
+            var passed = 'No';
+            if (this.state.timeRemaining <= 0){
+                passed = 'Yes';
+            }
+
+            AsyncStorage.getItem('sessions').then((data) => {
+                data = JSON.parse( data );
+                var newSession = {
+                    'number': value,
+                    'date': date,
+                    'target': `${this.state.timeInputMin}:${targetSeconds}`,
+                    'achieved': achievedTimeString,
+                    'passed': passed
+                }
+                data.values.push(newSession);
+                
+                AsyncStorage.setItem( 'sessions', JSON.stringify( data ) );
+            });
+        })
       }
 
       onChangedMin(text){
@@ -91,13 +130,27 @@ class Timer extends Component {
           {
              this.state.clockRunning = false;
              this.stopClock();
+             this.failedSession();
           }
           this.render();
       }
 
       completedSuccessfully()
       {
+        AsyncStorage.getItem('successCount').then((value) => {
+            var temp = parseInt(value, 10) + 1;
+            value = +value + 1;
+            AsyncStorage.setItem( 'successCount', JSON.stringify(value) );
+        })
+      }
 
+      failedSession()
+      {
+        AsyncStorage.getItem('failCount').then((value) => {
+            var temp = parseInt(value, 10) + 1;
+            value = +value + 1;
+            AsyncStorage.setItem( 'failCount', JSON.stringify(value) );
+        })
       }
       
       goToData = () => {
