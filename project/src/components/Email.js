@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, Text, TextInput, ScrollView, AsyncStorage } from 'react-native'
-import email from 'react-native-email'
+import { StyleSheet, Button, View, Text, TextInput, ScrollView, AsyncStorage } from 'react-native';
+import email from 'react-native-email';
+import { Actions } from 'react-native-router-flux';
  
 class Email extends Component {
     state = {to: '', cc: '', bcc: '', subject: '', body: 'a'};
 
     componentDidMount = () => AsyncStorage.getItem('dataForExport').then((value) => this.setState({ 'body': value }));
+
+    goToData = () => {
+        Actions.data();
+    }
 
     render() {
         return (
@@ -55,6 +60,9 @@ class Email extends Component {
                     />
                     */}
                     <Button title="Send" onPress={this.handleEmail} color="#D94336" />
+                </View>
+                <View style={{ marginTop: 20 }}>
+                    <Button title="Return" onPress={this.goToData} color="#D94336" />
                 </View>
             </ScrollView>
         )
