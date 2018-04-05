@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { number } from 'prop-types';
 import { Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView, AsyncStorage, Image} from 'react-native';
-//import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input } from './common';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
