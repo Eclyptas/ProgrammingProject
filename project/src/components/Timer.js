@@ -227,12 +227,12 @@ class Timer extends Component {
                                 <Button onPress={this.goToData.bind(this)}
                                         title="Data" />
                             </CardSection>
-
+                            {/*
                             <CardSection>
                                 <Button onPress={this.goToStars.bind(this)}
                                         title="Stars" />
                             </CardSection>
-                            
+                            */}
                         </Card>
                     </ScrollView>
                 );
