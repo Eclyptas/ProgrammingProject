@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input} from './common';
-import {StyleSheet, View, ImageBackground, Image, ScrollView} from 'react-native';
+import { Card, CardSection, Input} from './common';
+import {StyleSheet, View, ImageBackground, Image, ScrollView, Button} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 //TODO show total number of stars
 
@@ -9,7 +10,7 @@ class Success extends Component {
 
     goBack()
     {
-
+        Actions.timer();
     }
 
     render() {
@@ -20,7 +21,7 @@ class Success extends Component {
                     />
                     <Button
                         onPress={this.goBack.bind(this)}  //NEEDS TO RETURN TO THE TIMER
-                        title="Good Job!"
+                        title="Return to Training"
                         color="#49D53C"
                     />
                 </ScrollView>)

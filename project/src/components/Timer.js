@@ -138,6 +138,7 @@ class Timer extends Component {
             value = +value + 1;
             AsyncStorage.setItem( 'successCount', JSON.stringify(value) );
         })
+        Actions.success();
       }
 
       failedSession()
@@ -147,6 +148,7 @@ class Timer extends Component {
             value = +value + 1;
             AsyncStorage.setItem( 'failCount', JSON.stringify(value) );
         })
+        Actions.failure();
       }
       
       goToData = () => {

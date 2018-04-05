@@ -22,7 +22,6 @@ class Email extends Component {
                         value = {this.state.to}
                         keyboardType='email-address'
                         returnKeyType='next'
-                        //onSubmitEditing={ () => this.ccInput.focus()}
                     />
                     <TextInput style= {styles.input}     
                         placeholder="Cc:  "
@@ -30,8 +29,6 @@ class Email extends Component {
                         value = {this.state.cc}
                         keyboardType='email-address'
                         returnKeyType='next'
-                        //ref={(input) => this.ccInput = input}
-                        //onSubmitEditing={ () => this.bccInput.focus()}
                     />      
                     <TextInput style= {styles.input}     
                         placeholder="Bcc:  "
@@ -39,24 +36,6 @@ class Email extends Component {
                         value = {this.state.bcc} 
                         keyboardType='email-address'
                         returnKeyType='next'
-                        //ref={(input) => this.bccInput = input}
-                        //onSubmitEditing={ () => this.subjectInput.focus()}
-                    />
-                    {/*}
-                    <TextInput style= {styles.input}     
-                        placeholder="Subject:  "
-                        onChangeText={(subject) => {this.setState({subject})} }
-                        value = {this.state.subject}
-                        returnKeyType='next'
-                        //ref={(input) => this.subjectInput = input}
-                        //onSubmitEditing={ () => this.bodyInput.focus()}
-                    />
-                    <TextInput style= {styles.input}
-                        placeholder="Body:   "
-                        multiline= {true}
-                        onChangeText={(body) => {this.setState({body})} }
-                        value = {this.state.body}
-                        //ref={(input) => this.bodyInput = input}
                     />
                     */}
                     <Button title="Send" onPress={this.handleEmail} color="#D94336" />
@@ -76,7 +55,6 @@ class Email extends Component {
             bcc: [this.state.bcc], // string or array of email addresses
             subject: "Stereotypy Training App Data",
             body: this.state.body,
-            //attachment: "/storage/emulated/0/Download/data.csv"
         }).catch(console.error)
     }
 }
