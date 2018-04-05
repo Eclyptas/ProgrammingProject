@@ -4,7 +4,7 @@ import {StyleSheet, View, ImageBackground, Image} from 'react-native';
 
 //TODO show total number of stars
 
-class SetupForm extends Component {
+class Failure extends Component {
     state = { name: '', age: '', stereoRate: '', stereotypies: '', password: '' };
 
     goBack()
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default SetupForm;
+export default Failure;
