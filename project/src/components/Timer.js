@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { number } from 'prop-types';
-import { Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView, AsyncStorage } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Vibration, Button, StyleSheet, Text, View, TextInput, ScrollView, AsyncStorage, Image} from 'react-native';
+//import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input } from './common';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -10,8 +10,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 class Timer extends Component {
     constructor(props) {
         super(props);
-    this.state = {clickCount:0, timeMultiplier:1, timeRemaining:20, time:20, incrementSet: false, incrementer:0, myFunction:0, failedRound: false, passedRound: false, clockRunning: false, timeInputMin:1, timeInputSec:30, timeInputMS:"1",timeInputSS:"30",
-                   }
+    this.state = {clickCount:0, timeMultiplier:1, timeRemaining:20, time:20, incrementSet: false, incrementer:0, myFunction:0, failedRound: false, passedRound: false, clockRunning: false, timeInputMin:1, timeInputSec:30, timeInputMS:"1",timeInputSS:"30",useScreen:0}
     this.buttons = {stopButton:"Stop", startButton:"Start"}
     }
 
@@ -93,7 +92,6 @@ class Timer extends Component {
                 newText = newText + text[i];
             }
             else {
-                // your call back function
                 alert("please enter numbers only");
             }
         }
@@ -112,7 +110,6 @@ class Timer extends Component {
                 newText = newText + text[i];
             }
             else {
-                // your call back function
                 alert("please enter numbers only");
             }
         }
@@ -125,7 +122,6 @@ class Timer extends Component {
       clickedStop()
       {
           this.state.clickCount += 1;
-          this.buttons.stopButton = "Click again to fail";
           if (this.state.clickCount >= 2)
           {
              this.state.clockRunning = false;
@@ -169,6 +165,7 @@ class Timer extends Component {
             this.completedSuccessfully();
         }
 
+        
             return (
                 <ScrollView scrollEnabled={true}>
                     <Card style={styles.container}>
@@ -177,11 +174,11 @@ class Timer extends Component {
                             <AnimatedCircularProgress
                             size={300}
                             width={150}
-                            fill={(this.state.timeRemaining/this.state.time)*100}
-                            tintColor="#D94336"
+                            fill={100-((this.state.timeRemaining/this.state.time)*100)}
+                            tintColor="#ffffff"
                             onAnimationComplete={() => console.log('onAnimationComplete')}
                             ref="circularProgress"
-                            backgroundColor="#ffffff"
+                            backgroundColor="#D94336"
                             rotation={0}
                             tension={0}
                             friction={20}
@@ -191,14 +188,14 @@ class Timer extends Component {
                         
                         <View style={styles.alternativeLayoutButtonContainer}>
                             <Button
-                            onPress={this.clickedStop.bind(this)}
-                            title={this.buttons.stopButton}
-                            color="#D30700"
-                            />
-                            <Button
                             onPress={this.startClock.bind(this)}
                             title={this.buttons.startButton}
                             color="#49D53C"
+                            />
+                            <Button
+                            onPress={this.clickedStop.bind(this)}
+                            title={this.buttons.stopButton}
+                            color="#D30700"
                             />
                         </View>
                         
